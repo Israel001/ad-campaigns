@@ -66,7 +66,6 @@ export class CampaignsService {
 
     const cacheKey = `${CacheKeys.CAMPAIGN_DATA}`;
     const cachedCampaigns: string = await this.cacheManager.get(cacheKey);
-    console.log('here', cacheKey, cachedCampaigns);
     if (cachedCampaigns) {
       this.logger.debug('Got campaigns from cache');
       return JSON.parse(cachedCampaigns);
@@ -110,8 +109,11 @@ export class CampaignsService {
     if (request.images && request.images.length)
       await this.imageService.upload(request.images, campaign.id);
 
-    if (request.imagesToDelete && request.imagesToDelete.length)
+    if (request.imagesToDelete && request.imagesToDelete.length) {
+      if (typeof request.imagesToDelete === 'string')
+        request.imagesToDelete = [request.imagesToDelete];
       this.imageService.delete(request.imagesToDelete, campaign.id);
+    }
 
     this.cacheManager.reset();
 

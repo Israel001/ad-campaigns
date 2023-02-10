@@ -12,7 +12,11 @@ import {
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { CampaignImagesValidationInterceptor } from 'src/lib/interceptors/campaign-images-validation-interceptor';
-import { CampaignQuery, CreateCampaignDto, UpdateCampaignDto } from './campaigns.dto';
+import {
+  CampaignQuery,
+  CreateCampaignDto,
+  UpdateCampaignDto,
+} from './campaigns.dto';
 import { CampaignsService } from './campaigns.service';
 
 @Controller('campaigns')
